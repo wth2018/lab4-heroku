@@ -62,6 +62,13 @@ def bot():
 	message = r.json()["text"]
 	print(message)
 
+	mentionedPeopleId = webhookMessage["data"]["mentionedPeople"][0]
+	print(mentionedPeopleId)
+	if mentionedPeopleId == "Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL2I5NDUzMWE1LWY1ZWItNDhmMC05NzcwLWNmMmUyZGMxNjc1Yw":
+		roomId = r.json()["roomId"]
+		url = "https://api.ciscospark.com/v1/messages"
+		r = requests.post(url, headers={'Authorization': 'Bearer MTQ0MTg2YzItN2QwMS00YWUxLWE4NzktZDJhNTNhNTg1NDA1ZjNkODI3YmEtMWQy_PF84_consumer'}, data={'roomId': roomId, 'text': 'Hello from your bot!'})
+
 
 	return jsonify(webhookMessage)
 
