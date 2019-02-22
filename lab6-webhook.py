@@ -1,6 +1,7 @@
 import sqlite3
 from flask import Flask, request, jsonify, send_from_directory
 import os
+import requests
 
 app = Flask(__name__)
 
@@ -54,6 +55,14 @@ def bot():
 	print(webhookMessage)
 	messageId = webhookMessage["data"]["id"]
 	print(messageId)
+
+	url = "https://api.ciscospark.com/v1/messages/" + messageId
+	r = requests.get(url, headers={'Authorization': 'Bearer MTQ0MTg2YzItN2QwMS00YWUxLWE4NzktZDJhNTNhNTg1NDA1ZjNkODI3YmEtMWQy_PF84_consumer'})
+	print(r.json())
+	message = r.json()["text"]
+	print(message)
+
+
 	return jsonify(webhookMessage)
 
 initDatabase()
