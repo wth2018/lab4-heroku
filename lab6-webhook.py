@@ -48,6 +48,13 @@ def about():
 		pushDataToDatabase(name, age)
 		return jsonify(name = name, age = age)
 
+@app.route("/api/bot", methods = ['POST'])
+def bot():
+	webhookMessage = request.json
+	print(webhookMessage)
+	messageId = webhookMessage["data"]["id"]
+	print(messageId)
+	return jsonify(webhookMessage)
 
 initDatabase()
 pushDataToDatabase("Charles Webex", 15)
