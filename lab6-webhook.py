@@ -1,7 +1,6 @@
 import sqlite3
 from flask import Flask, request, jsonify, send_from_directory
 import os
-import requests
 
 app = Flask(__name__)
 
@@ -56,27 +55,9 @@ def bot():
 	print(webhookMessage)
 	messageId = webhookMessage["data"]["id"]
 	print(messageId)
-	
-	#get message text
-	messageApiUrl = "https://api.ciscospark.com/v1/messages" 
-	# wth2018-3456
-	botAccessToken = "NmIxNWMyN2EtNDIyMi00MmM3LTlmNjYtYTIwNGFmYWRlNDcwYWJlN2E0ZTctODhh_PF84_consumer"
-	botId = "Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL2I5NDUzMWE1LWY1ZWItNDhmMC05NzcwLWNmMmUyZGMxNjc1Yw"
-	
-	r = requests.get(messageApiUrl + "/" + messageId, headers={'Authorization': 'Bearer ' + botAccessToken})
-	print(r.json())
-	message = r.json()["text"]
-	print(message)
-
-	#send answer if bot mentioned
-	mentionedPeopleId = webhookMessage["data"]["mentionedPeople"][0]
-	print(mentionedPeopleId)
-	#if mentionedPeopleId ==  botId:
-	roomId = r.json()["roomId"]
-	r = requests.post(messageApiUrl + "?mentionedPeople=me", headers={'Authorization': 'Bearer ' + botAccessToken}, data={'roomId': roomId, 'text': 'Hello from your bot!'})
 	return jsonify(webhookMessage)
 
 initDatabase()
-pushDataToDatabase("Victoria Teams", 15)
+pushDataToDatabase("Charles Webex", 15)
 if __name__ == "__main__":
 	app.run()
