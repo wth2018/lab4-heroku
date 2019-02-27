@@ -56,6 +56,11 @@ def bot():
 	print(webhookMessage)
 	messageId = webhookMessage["data"]["id"]
 	print(messageId)
+
+	messageApiUrl = "https://api.ciscospark.com/v1/messages" 
+	# wth2018-3456
+	botAccessToken = "NmIxNWMyN2EtNDIyMi00MmM3LTlmNjYtYTIwNGFmYWRlNDcwYWJlN2E0ZTctODhh_PF84_consumer"
+	
 	
 	r = requests.get(messageApiUrl + "/" + messageId, headers={'Authorization': 'Bearer ' + botAccessToken})
 	print(r.json())
