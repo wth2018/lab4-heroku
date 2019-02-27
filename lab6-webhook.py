@@ -1,6 +1,7 @@
 import sqlite3
 from flask import Flask, request, jsonify, send_from_directory
 import os
+import requests
 
 app = Flask(__name__)
 
@@ -55,7 +56,15 @@ def bot():
 	print(webhookMessage)
 	messageId = webhookMessage["data"]["id"]
 	print(messageId)
+	
+	r = requests.get(messageApiUrl + "/" + messageId, headers={'Authorization': 'Bearer ' + botAccessToken})
+	print(r.json())
+	message = r.json()["text"]
+	print(message)
+
 	return jsonify(webhookMessage) 
+
+
 
 initDatabase()
 pushDataToDatabase("Charles Webex", 15)
