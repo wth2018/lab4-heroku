@@ -51,28 +51,31 @@ def about():
 
 @app.route("/api/bot", methods = ['POST'])
 def bot():
+	# process message data
 	webhookMessage = request.json
 	print(webhookMessage)
 	messageId = webhookMessage["data"]["id"]
 	print(messageId)
-
-	url = "https://api.ciscospark.com/v1/messages/" + messageId
-	r = requests.get(url, headers={'Authorization': 'Bearer MTQ0MTg2YzItN2QwMS00YWUxLWE4NzktZDJhNTNhNTg1NDA1ZjNkODI3YmEtMWQy_PF84_consumer'})
+	
+	#get message text
+	messageApiUrl = "https://api.ciscospark.com/v1/messages/" 
+	botAccessToken = "YTVlODc5MTgtZjBkYy00ZDVlLTliNGItZjUyYmY4YTM4NWQyNDY0YTNiYTQtMzIz_PF84_consumer"
+	botId = "Y2lzY29zcGFyazovL3VzL1BFT1BMRS8yMjkxODk0ZC0zNGRmLTRhM2EtYjRjMy04YjQ5ZGZkYzE4ZDU"
+	
+	r = requests.get(messageApiUrl + "/" + messageId, headers={'Authorization': 'Bearer ' + botAccessToken})
 	print(r.json())
 	message = r.json()["text"]
 	print(message)
 
+	#send answer if bot mentioned
 	mentionedPeopleId = webhookMessage["data"]["mentionedPeople"][0]
 	print(mentionedPeopleId)
-	if mentionedPeopleId == "Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL2I5NDUzMWE1LWY1ZWItNDhmMC05NzcwLWNmMmUyZGMxNjc1Yw":
+	if mentionedPeopleId ==  botId:
 		roomId = r.json()["roomId"]
-		url = "https://api.ciscospark.com/v1/messages"
-		r = requests.post(url, headers={'Authorization': 'Bearer MTQ0MTg2YzItN2QwMS00YWUxLWE4NzktZDJhNTNhNTg1NDA1ZjNkODI3YmEtMWQy_PF84_consumer'}, data={'roomId': roomId, 'text': 'Hello from your bot!'})
-
-
+		r = requests.post(url, headers={'Authorization': 'Bearer ' + botAccessToken}, data={'roomId': roomId, 'text': 'Hello from your bot!'})
 	return jsonify(webhookMessage)
 
 initDatabase()
-pushDataToDatabase("Charles Webex", 15)
+pushDataToDatabase("Victoria Teams", 15)
 if __name__ == "__main__":
 	app.run()
