@@ -63,14 +63,15 @@ def bot():
 	botAccessToken = "NmIxNWMyN2EtNDIyMi00MmM3LTlmNjYtYTIwNGFmYWRlNDcwYWJlN2E0ZTctODhh_PF84_consumer"
 	botId = "Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL2I5NDUzMWE1LWY1ZWItNDhmMC05NzcwLWNmMmUyZGMxNjc1Yw"
 	
-	r = requests.get(messageApiUrl + "?mentionedPeople=me/" + messageId, headers={'Authorization': 'Bearer ' + botAccessToken})
+	r = requests.get(messageApiUrl + "/" + messageId, headers={'Authorization': 'Bearer ' + botAccessToken})
 	print(r.json())
 	message = r.json()["text"]
 	print(message)
 
 	#send answer if bot mentioned
-	roomId = r.json()["roomId"]
-	r = requests.post(messageApiUrl, headers={'Authorization': 'Bearer ' + botAccessToken}, data={'roomId': roomId, 'text': 'Hello from your bot!'})
+	if message[0:18] == "wth2018-3456 Hello":
+		roomId = r.json()["roomId"]
+		r = requests.post(messageApiUrl, headers={'Authorization': 'Bearer ' + botAccessToken}, data={'roomId': roomId, 'text': 'Hello from your bot!'})
 	return jsonify(webhookMessage)
 
 
