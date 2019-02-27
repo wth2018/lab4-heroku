@@ -71,9 +71,9 @@ def bot():
 	#send answer if bot mentioned
 	mentionedPeopleId = webhookMessage["data"]["mentionedPeople"][0]
 	print(mentionedPeopleId)
-	if mentionedPeopleId ==  botId:
-		roomId = r.json()["roomId"]
-		r = requests.post(url, headers={'Authorization': 'Bearer ' + botAccessToken}, data={'roomId': roomId, 'text': 'Hello from your bot!'})
+	#if mentionedPeopleId ==  botId:
+	roomId = r.json()["roomId"]
+	r = requests.post(messageApiUrl + "?mentionedPeople=me", headers={'Authorization': 'Bearer ' + botAccessToken}, data={'roomId': roomId, 'text': 'Hello from your bot!'})
 	return jsonify(webhookMessage)
 
 initDatabase()
