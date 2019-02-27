@@ -55,7 +55,7 @@ def bot():
 	print(webhookMessage)
 	messageId = webhookMessage["data"]["id"]
 	print(messageId)
-	return jsonify(webhookMessage)
+	return jsonify(webhookMessage) 
 
 initDatabase()
 pushDataToDatabase("Charles Webex", 15)
