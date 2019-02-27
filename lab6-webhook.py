@@ -58,9 +58,10 @@ def bot():
 	print(messageId)
 	
 	#get message text
-	messageApiUrl = "https://api.ciscospark.com/v1/messages/" 
-	botAccessToken = "YTVlODc5MTgtZjBkYy00ZDVlLTliNGItZjUyYmY4YTM4NWQyNDY0YTNiYTQtMzIz_PF84_consumer"
-	botId = "Y2lzY29zcGFyazovL3VzL1BFT1BMRS8yMjkxODk0ZC0zNGRmLTRhM2EtYjRjMy04YjQ5ZGZkYzE4ZDU"
+	messageApiUrl = "https://api.ciscospark.com/v1/messages" 
+	# wth2018-3456
+	botAccessToken = "NmIxNWMyN2EtNDIyMi00MmM3LTlmNjYtYTIwNGFmYWRlNDcwYWJlN2E0ZTctODhh_PF84_consumer"
+	botId = "Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL2I5NDUzMWE1LWY1ZWItNDhmMC05NzcwLWNmMmUyZGMxNjc1Yw"
 	
 	r = requests.get(messageApiUrl + "/" + messageId, headers={'Authorization': 'Bearer ' + botAccessToken})
 	print(r.json())
